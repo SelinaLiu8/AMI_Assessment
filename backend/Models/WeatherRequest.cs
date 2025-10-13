@@ -14,6 +14,6 @@ namespace backend.Models
         public string Zip { get; set; } = string.Empty;
 
         [RegularExpression(@"^[CF]$", ErrorMessage = "Unit must be 'C' or 'F'.")]
-        public string? UnitOfMeasurement { get; set; } = "F";
+        public string? UnitOfMeasurement { get; set; } = string.Empty;
     }
 }

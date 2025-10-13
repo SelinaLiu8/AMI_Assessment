@@ -10,6 +10,7 @@ namespace backend.Models
         public string City { get; set; } = "";
         public string State { get; set; } = "";
         public string Zip { get; set; } = "";
+        public string UnitMeasure { get; set; } = "";
 
         public double Temperature { get; set; }
         public double CloudCoverage { get; set; }

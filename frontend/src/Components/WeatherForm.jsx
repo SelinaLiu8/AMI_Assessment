@@ -6,25 +6,26 @@ const WeatherForm = ({ onSubmit, onClose }) => {
     const [zip, setZip] = useState('');
     const [state, setState] = useState('');
     const [error, setError] = useState('');
+    const [unitOfMeasurement, setUnitOfMeasurement] = useState('F');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setError('');
 
         if (!city || !zip || !state) {
-        setError('All fields are required.');
-        return;
-        }
-        if (!/^\d{5}$/.test(zip)) {
-        setError('Zip Code must be 5 digits.');
-        return;
+            setError('All fields are required.');
+            return;
         }
         if (!/^[A-Za-z]{2}$/.test(state)) {
-        setError('State must be 2 letters.');
-        return;
+            setError('State must be 2 letters.');
+            return;
+        }
+        if (!/^\d{5}$/.test(zip)) {
+            setError('Zip Code must be 5 digits.');
+            return;
         }
 
-        onSubmit({ city, zip, state });
+        onSubmit({ city, zip, state, unitOfMeasurement });
     };
 
     return (
@@ -43,6 +44,25 @@ const WeatherForm = ({ onSubmit, onClose }) => {
                     <div className='form-field'>
                         <label className='form-label'>Zip Code:</label>
                         <input className='form-input' type="text" value={zip} onChange={(e) => setZip(e.target.value)} required />
+                    </div>
+                    <div className='form-field'>
+                        <label className='form-label'>Unit:</label>
+                        <div className='unit-toggle-rect'>
+                            <button
+                            type="button"
+                            className={`toggle-option ${unitOfMeasurement === 'F' ? 'active' : ''}`}
+                            onClick={() => setUnitOfMeasurement('F')}
+                            >
+                            °F
+                            </button>
+                            <button
+                            type="button"
+                            className={`toggle-option ${unitOfMeasurement === 'C' ? 'active' : ''}`}
+                            onClick={() => setUnitOfMeasurement('C')}
+                            >
+                            °C
+                            </button>
+                        </div>
                     </div>
                     <button className='submit-btn btn' type="submit">Submit</button>
                     {error && <p className="error-text">{error}</p>}

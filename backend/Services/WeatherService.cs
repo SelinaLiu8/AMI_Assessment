@@ -69,6 +69,7 @@ namespace backend.Services
                 City = city,
                 State = state,
                 Zip = request.Zip,
+                UnitMeasure = request.UnitOfMeasurement,
                 Temperature = weatherData.GetProperty("temperature").GetDouble(),
                 CloudCoverage = weatherData.GetProperty("cloudCoverage").GetDouble(),
                 WindSpeed = weatherData.GetProperty("windSpeed").GetDouble(),

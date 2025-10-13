@@ -3,7 +3,8 @@ import WeatherForm from './Components/WeatherForm'
 import WeatherDisplay from './Components/WeatherDisplay'
 import LoadingScreen from './Components/LoadingScreen'
 import LandingScreen from './Components/LandingScreen'
-import './App.css'
+import Header from './Components/Header'
+import '../src/Styles/App.css'
 
 function App() {
   const [showForm, setShowForm] = useState(false)
@@ -12,9 +13,13 @@ function App() {
   const [error, setError] = useState('')
 
   const handleFormSubmit = async (formData) => {
+    setShowForm(false);
     setLoading(true)
     setError('')
     setWeatherData(null)
+
+    console.log('form data:', formData);
+
 
     try {
       const response = await fetch('http://localhost:5262/api/Weather', {
@@ -30,6 +35,7 @@ function App() {
       }
 
       const data = await response.json()
+      console.log("data:", data)
       setWeatherData(data)
     } catch (err) {
       console.error(err)
@@ -44,7 +50,7 @@ function App() {
         <LandingScreen onSearchClick={() => setShowForm(true)} />
       )}
 
-      {showForm && !weatherData && !loading && (
+      {showForm && !loading && (
         <WeatherForm 
           onSubmit={handleFormSubmit} 
           onClose={() => setShowForm(false)} 
@@ -53,7 +59,11 @@ function App() {
 
       {loading && <LoadingScreen />}
       {error && <p className='error-text'>{error}</p>}
-      {weatherData && <WeatherDisplay data={weatherData} />}
+      {weatherData && 
+        <>
+          <Header onSearchClick={() => setShowForm(true)} />
+          <WeatherDisplay data={weatherData} />
+        </>}
     </>
   )
 }

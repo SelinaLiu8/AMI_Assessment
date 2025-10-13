@@ -1,0 +1,110 @@
+@import './variables.css';
+
+:root { --header-height: 88.8px; }
+
+.weather-display-container {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  /* use full remaining height */
+  height: calc(100vh - var(--header-height));
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.main-display {
+    background-color: transparent;
+    height: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.display-title {
+    margin: 0;
+    font-size: 3rem;
+}
+
+.weather-icon {
+    font-size: 10rem;
+    color: var(--accent-orange-color);
+    padding: 0 5rem;
+}
+
+.forecast-display {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--secondary-color);
+}
+
+.forecast-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    padding-left: 1rem;
+}
+
+.sub-display {
+    text-align: left;
+}
+
+.sub-display,
+.forecast-display,
+.prediction-display {
+    background-color: var(--secondary-color);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.display-title {
+    margin-bottom: 0.5rem;
+}
+
+.weather-icon.sun {
+    color: #FFD166;
+}
+
+.weather-icon.rain {
+    color: #4A90E2;
+}
+
+.weather-icon.snow {
+    color: #ffffff;
+}
+
+.weather-icon.wind {
+    color: #76C7C0;
+}
+
+.prediction-display ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .weather-display-container {
+        grid-template-columns: 1fr;
+    }
+}

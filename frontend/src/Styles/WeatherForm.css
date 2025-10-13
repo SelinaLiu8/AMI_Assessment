@@ -1,3 +1,5 @@
+@import './variables.css';
+
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -12,7 +14,7 @@
 }
 
 .popup-content {
-    background: rgb(104, 104, 104);
+    background: var(--secondary-color);
     padding: 2rem;
     border-radius: 10px;
     position: relative;
@@ -58,11 +60,12 @@
     font-size: 1.5rem;
     cursor: pointer;
     padding: 0;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .close-btn:hover {
-    color: #646cff;
-    transition: 0.3s;
+    color: var(--accent-orange-color);
+    transform: scale(1.1);
 }
 
 .close-btn:focus {
@@ -75,3 +78,35 @@
     cursor: pointer;
     margin-top: 1rem;
 }
+
+.unit-toggle-rect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 120px;
+    margin-top: 0.5rem;
+    background-color: var(--primary-color);
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.toggle-option {
+    flex: 1;
+    border: none;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.toggle-option:hover {
+    background-color: rgb(68, 68, 68);
+}
+
+.toggle-option.active {
+    background-color: var(--accent-orange-color);
+}
+
