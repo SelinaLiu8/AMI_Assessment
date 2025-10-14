@@ -4,10 +4,12 @@
 
 .weather-display-container {
     margin-top: 3rem;
+    margin-bottom: 2rem;
     top: var(--header-height);
     left: 0;
     right: 0;
     height: calc(90vh - var(--header-height));
+    max-width: 100%;
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 1.5rem;
