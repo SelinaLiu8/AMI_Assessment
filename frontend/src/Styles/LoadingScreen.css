@@ -13,14 +13,12 @@
   z-index: 1000;
 }
 
-/* Spinner container */
 .spinner-container {
   width: 80px;
   height: 80px;
   position: relative;
 }
 
-/* Spinner circle */
 .spinner {
   width: 100%;
   height: 100%;
@@ -30,7 +28,6 @@
   animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
 }
 
-/* Spin animation with "momentum" easing */
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
