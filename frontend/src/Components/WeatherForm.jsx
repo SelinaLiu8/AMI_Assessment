@@ -35,15 +35,15 @@ const WeatherForm = ({ onSubmit, onClose }) => {
                  <form className="weather-form" onSubmit={handleSubmit}>
                     <div className='form-field'>
                         <label className='form-label'>City:</label>
-                        <input className='form-input' type="text" placeholder='New York, Seattle, Los Angeles' value={city} onChange={(e) => setCity(e.target.value)} required />
+                        <input className='form-input' type="text" placeholder='New York, Seattle...' value={city} onChange={(e) => setCity(e.target.value)} required />
                     </div>
                     <div className='form-field'>
                         <label className='form-label'>State:</label>
-                        <input className='form-input' type="text" placeholder='NY, WA, CA' value={state} onChange={(e) => setState(e.target.value)} required />
+                        <input className='form-input' type="text" placeholder='Two-letter code, e.g., NY, CA' value={state} onChange={(e) => setState(e.target.value)} required />
                     </div>
                     <div className='form-field'>
                         <label className='form-label'>Zip Code:</label>
-                        <input className='form-input' type="text" placeholder='18297' value={zip} onChange={(e) => setZip(e.target.value)} required />
+                        <input className='form-input' type="text" placeholder='5-digit code, e.g., 18297' value={zip} onChange={(e) => setZip(e.target.value)} required />
                     </div>
                     <div className='form-field'>
                         <label className='form-label'>Unit:</label>

@@ -75,7 +75,7 @@ namespace backend.Services
                 City = city,
                 State = state,
                 Zip = request.Zip,
-                UnitMeasure = request.UnitOfMeasurement,
+                UnitMeasure = request.UnitOfMeasurement ?? "F",
                 Temperature = GetDoubleSafe(weatherData, "temperature") ?? -1000,
                 CloudCoverage = GetDoubleSafe(weatherData, "cloudCoverage") ?? -1000,
                 WindSpeed = GetDoubleSafe(weatherData, "windSpeed") ?? -1000,
