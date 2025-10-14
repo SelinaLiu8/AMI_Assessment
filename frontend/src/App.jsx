@@ -31,7 +31,11 @@ function App() {
       })
 
       if (!response.ok) {
-        throw new Error(`Error ${response.status}: ${response.statusText}`)
+        if (response.status === 400 || response.status === 500 || response.status === 404) {
+          throw new Error('Location not found. Please check the city, state, and zip code.');
+        }
+
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
       }
 
       const data = await response.json()
@@ -39,7 +43,7 @@ function App() {
       setWeatherData(data)
     } catch (err) {
       console.error(err)
-      setError('Failed to fetch weather data. Please try again.')
+      setError(err.message || 'Failed to fetch weather data. Please try again.');
     } finally {
       setLoading(false)
     }

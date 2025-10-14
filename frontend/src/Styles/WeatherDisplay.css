@@ -44,10 +44,8 @@
     font-size: 3rem;
 }
 
-.weather-icon {
-    font-size: 10rem;
-    color: var(--accent-orange-color);
-    padding: 0 5rem;
+.display-subtitle {
+    font-size: 2rem;
 }
 
 .forecast-display {
@@ -59,9 +57,24 @@
 .forecast-list {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     gap: 0.25rem;
     padding-left: 1rem;
+}
+
+.forecast-item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 1rem;
+    border-radius: 16px;
+    transition: transform 0.2s ease, color 0.2s ease;
+
+}
+
+.forecast-item:hover {
+    background-color: var(--accent-orange-color);
 }
 
 .sub-display {
@@ -79,6 +92,13 @@
 
 .display-title {
     margin-bottom: 0.5rem;
+}
+
+.weather-icon {
+    font-size: 10rem;
+    color: var(--accent-orange-color);
+    margin: 0 5rem;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .weather-icon.sun {
@@ -103,8 +123,25 @@
     margin: 0;
 }
 
+.weather-icon:hover {
+    transform: scale(1.1);
+}
+
 @media (max-width: 768px) {
     .weather-display-container {
         grid-template-columns: 1fr;
+    }
+    
+    .main-display {
+        flex-direction: column;
+    }
+
+    .main-info {
+        align-self: flex-start;
+    }
+    
+    .weather-icon {
+        align-self: flex-start;
+        margin: 1rem 0;
     }
 }
