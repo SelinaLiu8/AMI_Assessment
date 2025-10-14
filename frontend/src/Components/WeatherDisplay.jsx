@@ -88,7 +88,7 @@ const WeatherDisplay = ({ data }) => {
                 </div>
 
                 <div className="sub-display">
-                <p><strong>Cloud Coverage:</strong> {data.cloudCoverage * 100}%</p>
+                <p><strong>Cloud Coverage:</strong> {Math.ceil(data.cloudCoverage * 100)}%</p>
                 <p>
                     <strong>Wind:</strong> {data.windSpeed} mph ({data.windDirection}°)
                 </p>
