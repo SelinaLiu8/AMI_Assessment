@@ -10,9 +10,15 @@ namespace backend.Services
     {
         private readonly HttpClient _httpClient;
 
-        public WeatherService()
+        // public WeatherService()
+        // {
+        //     _httpClient = new HttpClient();
+        // }
+
+        // For testing only
+        public WeatherService(HttpClient httpClient)
         {
-            _httpClient = new HttpClient();
+            _httpClient = httpClient;
         }
 
         private async Task<string> GetAccessTokenAsync()
@@ -44,7 +50,6 @@ namespace backend.Services
             };
 
             var json = JsonSerializer.Serialize(payload);
-            Console.WriteLine("Payload: " + json);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             // Get current weather
@@ -55,11 +60,18 @@ namespace backend.Services
             var weatherJson = await weatherResponse.Content.ReadAsStringAsync();
             var weatherData = JsonDocument.Parse(weatherJson).RootElement[0];
 
+            // Helper to safely get a double or null
+            double? GetDoubleSafe(JsonElement element, string propertyName)
+            {
+                if (element.TryGetProperty(propertyName, out var prop) && prop.ValueKind == JsonValueKind.Number)
+                    return prop.GetDouble();
+                return null;
+            }
+
             // Get 12-month highest temps
-            var content2 = new StringContent(json, Encoding.UTF8, "application/json");
             var highestResponse = await _httpClient.PostAsync(
                 "https://ami-interviewassessment.azurewebsites.net/WeatherData/ByLocation/HighestTemps",
-                content2);
+                content);
             highestResponse.EnsureSuccessStatusCode();
             var highestJson = await highestResponse.Content.ReadAsStringAsync();
             var highestData = JsonDocument.Parse(highestJson).RootElement[0];
@@ -70,14 +82,13 @@ namespace backend.Services
                 State = state,
                 Zip = request.Zip,
                 UnitMeasure = request.UnitOfMeasurement,
-                Temperature = weatherData.GetProperty("temperature").GetDouble(),
-                CloudCoverage = weatherData.GetProperty("cloudCoverage").GetDouble(),
-                WindSpeed = weatherData.GetProperty("windSpeed").GetDouble(),
-                WindDirection = weatherData.GetProperty("windDirection").GetDouble(),
-                Rolling12MonthTemps = highestData.GetProperty("rolling12MonthTemps")
-                    .EnumerateArray()
-                    .Select(e => e.GetDouble())
-                    .ToArray(),
+                Temperature = GetDoubleSafe(weatherData, "temperature") ?? -1000,
+                CloudCoverage = GetDoubleSafe(weatherData, "cloudCoverage") ?? -1000,
+                WindSpeed = GetDoubleSafe(weatherData, "windSpeed") ?? -1000,
+                WindDirection = GetDoubleSafe(weatherData, "windDirection") ?? -1000,
+                Rolling12MonthTemps = highestData.TryGetProperty("rolling12MonthTemps", out var arr)
+                    ? arr.EnumerateArray().Select(e => e.GetDouble()).ToArray()
+                    : Array.Empty<double>(),
                 Precipitation = WeatherUtil.MapPrecipitation(weatherData)
             };
         }
