@@ -2,6 +2,8 @@
 
 A full-stack weather application built with ASP.NET Core backend and React frontend. Users can search for weather information by entering a city name and receive current weather data.
 
+**Author:** Selina Liu
+
 ## Tech Stack
 
 ### Backend
