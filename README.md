@@ -54,7 +54,7 @@ This creates a production build in the `frontend/dist` directory.
 
 ## Running the Application
 
-### Option 1: Run the Full Application (Recommended)
+### Option 1: Run the Full Application
 
 From the `backend` directory:
 
@@ -67,7 +67,7 @@ The application will be available at `http://localhost:5262` (or the port specif
 
 The backend serves the frontend static files, so you only need to run the backend to access the full application.
 
-### Option 2: Development Mode (Frontend Only)
+### Option 2: Development Mode
 
 If you want to develop the frontend separately:
 
