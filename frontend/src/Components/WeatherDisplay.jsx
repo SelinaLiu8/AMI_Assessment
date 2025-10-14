@@ -96,7 +96,7 @@ const WeatherDisplay = ({ data }) => {
                     <div>
                     <strong>Precipitation:</strong>
                         {data.precipitation.map((p, idx) => (
-                        <p key={idx}>{p.type} — {p.probability * 100}%</p>
+                        <p key={idx}>{p.type} — {Math.ceil(p.probability * 100)}%</p>
                         ))}
                     </div>
                 )}
@@ -105,7 +105,7 @@ const WeatherDisplay = ({ data }) => {
 
             {/* Right column */}
             <div className="forecast-display">
-                <h4 className='forecast-title'>12-Month Avg Highs:</h4>
+                <h4 className='forecast-title'>12-Month Average Highs:</h4>
                 <div className="forecast-list">
                     {data.rolling12MonthTemps.map((temp, idx) => (
                         <div className='forecast-item'>

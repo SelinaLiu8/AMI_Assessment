@@ -14,7 +14,8 @@
   gap: 1.5rem;
   padding: 1rem 2rem;
   box-sizing: border-box;
-  overflow: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 
