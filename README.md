@@ -93,8 +93,8 @@ dotnet test
 
 ```
 AMI_Assessment/
-├── backend/                  # ASP.NET Core API
-│   ├── Controllers/          # API controllers
+├── backend/                 # ASP.NET Core API
+│   ├── Controllers/         # API controllers
 │   ├── Models/              # Data models
 │   ├── Services/            # Business logic
 │   ├── Utils/               # Utility classes
