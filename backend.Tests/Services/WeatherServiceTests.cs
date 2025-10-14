@@ -31,6 +31,7 @@ public class WeatherServiceForTest : WeatherService
 
 public class WeatherServiceTests
 {
+    // TEST: Normal Parsed Response
     [Fact]
     public async Task GetWeatherDataAsync_ReturnsParsedWeatherResponse()
     {
@@ -89,6 +90,7 @@ public class WeatherServiceTests
         Assert.Equal(3, result.Rolling12MonthTemps.Length);
     }
 
+    // TEST: Response with Missing Fields
     [Fact]
     public async Task GetWeatherDataAsync_HandlesMissingFieldsGracefully()
     {
@@ -150,6 +152,7 @@ public class WeatherServiceTests
         Assert.Empty(result.Rolling12MonthTemps);
     }
 
+    // TEST: Response with lower cased city and state
     [Fact]
     public async Task GetWeatherDataAsync_ReturnsCapitalizedCityState()
     {
@@ -208,6 +211,7 @@ public class WeatherServiceTests
         Assert.Equal(3, result.Rolling12MonthTemps.Length);
     }
 
+    // TEST: 400 Bad Response for entering the wrong city or state
     [Fact]
     public async Task GetWeatherDataAsync_InvalidStateForCity_ReturnsBadRequest()
     {

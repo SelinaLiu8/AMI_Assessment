@@ -10,12 +10,6 @@ namespace backend.Services
     {
         private readonly HttpClient _httpClient;
 
-        // public WeatherService()
-        // {
-        //     _httpClient = new HttpClient();
-        // }
-
-        // For testing only
         public WeatherService(HttpClient httpClient)
         {
             _httpClient = httpClient;

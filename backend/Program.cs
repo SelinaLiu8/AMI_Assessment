@@ -29,6 +29,7 @@ var app = builder.Build();
 
 // Warning: This is used to avoid CORS, it serves frontend through backend
 var frontendPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName, "frontend", "dist");
+
 app.UseDefaultFiles(new DefaultFilesOptions
 {
     FileProvider = new PhysicalFileProvider(frontendPath),
@@ -41,7 +42,6 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = ""
 });
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     // app.UseCors("DevCorsPolicy");
