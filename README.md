@@ -110,8 +110,16 @@ AMI_Assessment/
 
 ## API Endpoints
 
-- `POST /api/weather` - Get weather data for a city
-  - Request body: `{ "city": "CityName" }`
+- `POST /api/weather` – Get weather data for a specific location
+  - **Request body** (JSON):
+    ```json
+    {
+      "city": "string",
+      "state": "ST",
+      "zip": "17507",
+      "unitOfMeasurement": "F"
+    }
+    ```
   - Response: Weather information including temperature, description, etc.
 
 ## Swagger Documentation
