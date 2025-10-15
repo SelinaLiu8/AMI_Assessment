@@ -54,14 +54,6 @@ namespace backend.Services
             var weatherJson = await weatherResponse.Content.ReadAsStringAsync();
             var weatherData = JsonDocument.Parse(weatherJson).RootElement[0];
 
-            // Helper to safely get a double or null
-            double? GetDoubleSafe(JsonElement element, string propertyName)
-            {
-                if (element.TryGetProperty(propertyName, out var prop) && prop.ValueKind == JsonValueKind.Number)
-                    return prop.GetDouble();
-                return null;
-            }
-
             // Get 12-month highest temps
             var highestResponse = await _httpClient.PostAsync(
                 "https://ami-interviewassessment.azurewebsites.net/WeatherData/ByLocation/HighestTemps",
@@ -76,10 +68,10 @@ namespace backend.Services
                 State = state,
                 Zip = request.Zip,
                 UnitMeasure = request.UnitOfMeasurement ?? "F",
-                Temperature = GetDoubleSafe(weatherData, "temperature") ?? -1000,
-                CloudCoverage = GetDoubleSafe(weatherData, "cloudCoverage") ?? -1000,
-                WindSpeed = GetDoubleSafe(weatherData, "windSpeed") ?? -1000,
-                WindDirection = GetDoubleSafe(weatherData, "windDirection") ?? -1000,
+                Temperature = WeatherUtil.GetDoubleSafe(weatherData, "temperature"),
+                CloudCoverage = WeatherUtil.GetDoubleSafe(weatherData, "cloudCoverage"),
+                WindSpeed = WeatherUtil.GetDoubleSafe(weatherData, "windSpeed"),
+                WindDirection = WeatherUtil.GetDoubleSafe(weatherData, "windDirection"),
                 Rolling12MonthTemps = highestData.TryGetProperty("rolling12MonthTemps", out var arr)
                     ? arr.EnumerateArray().Select(e => e.GetDouble()).ToArray()
                     : Array.Empty<double>(),

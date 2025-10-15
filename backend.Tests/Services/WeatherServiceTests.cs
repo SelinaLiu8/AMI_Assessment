@@ -142,14 +142,7 @@ public class WeatherServiceTests
 
         var request = new WeatherRequest { City = "Test", State = "TS", Zip = "00000", UnitOfMeasurement = "C" };
 
-        var result = await service.GetWeatherDataAsync(request);
-
-        // Assert default values for missing fields
-        Assert.Equal(-1000, result.Temperature);
-        Assert.Equal(40, result.CloudCoverage);
-        Assert.Equal(0, result.WindSpeed);
-        Assert.Equal(0, result.WindDirection);
-        Assert.Empty(result.Rolling12MonthTemps);
+        await Assert.ThrowsAsync<InvalidCastException>(() => service.GetWeatherDataAsync(request));
     }
 
     // TEST: Response with lower cased city and state

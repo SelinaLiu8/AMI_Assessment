@@ -36,5 +36,27 @@ namespace backend.Utils
 
             return Array.Empty<Precipitation>();
         }
+
+            public static double? GetDoubleSafe(JsonElement element, string propertyName)
+            {
+                try
+                {
+                    if (!element.TryGetProperty(propertyName, out var prop))
+                        throw new KeyNotFoundException($"Property '{propertyName}' not found in the JSON element.");
+
+                    if (prop.ValueKind != JsonValueKind.Number)
+                        throw new InvalidCastException($"Property '{propertyName}' is not a number. Found: {prop.ValueKind}");
+
+                    return prop.GetDouble();
+                }
+                catch (Exception ex) when (ex is InvalidCastException || ex is KeyNotFoundException)
+                {
+                    throw;
+                }
+                catch (Exception ex)
+                {
+                    throw new JsonException($"Unexpected error reading property '{propertyName}'.", ex);
+                }
+            }
     }
 }
