@@ -20,8 +20,22 @@ namespace backend.Controllers {
             if (!ModelState.IsValid)
                 return BadRequest("Invalid input");
 
-            var result = await _weatherService.GetWeatherDataAsync(request);
-            return Ok(result);
+            try {
+                var result = await _weatherService.GetWeatherDataAsync(request);
+                return Ok(result);
+            } 
+            catch (HttpRequestException ex)
+            {
+                // Handles network or 4xx/5xx response issues
+                return BadRequest($"Error fetching weather data: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                // Generic fallback for any unexpected error
+                throw new Exception($"Unexpected error occurred: {ex.Message}", ex);
+            }
+            
+            
         }
     }
 }

@@ -31,10 +31,9 @@ function App() {
       })
 
       if (!response.ok) {
-        if (response.status === 400 || response.status === 500 || response.status === 404) {
+        if (response.status === 400 || response.status === 404) {
           throw new Error('Location not found. Please check the city, state, and zip code.');
         }
-
         throw new Error(`Error ${response.status}: ${response.statusText}`);
       }
 
