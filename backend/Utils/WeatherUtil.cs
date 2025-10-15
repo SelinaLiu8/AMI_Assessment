@@ -37,7 +37,7 @@ namespace backend.Utils
             return Array.Empty<Precipitation>();
         }
 
-            public static double? GetDoubleSafe(JsonElement element, string propertyName)
+            public static double GetDoubleSafe(JsonElement element, string propertyName)
             {
                 try
                 {
